@@ -48,5 +48,8 @@ plt.ylabel("Actual Results")
 plt.show()
 
 
+from sklearn.metrics import classification_report #other way of finding error
 
+err2 = classification_report(y_test,py)
+print(err2)
 
