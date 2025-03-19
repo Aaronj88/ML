@@ -41,12 +41,10 @@ X_train,X_test,y_train,y_test = train_test_split(X,y,random_state=8,train_size=0
 m = LogisticRegression()
 m.fit(X_train,y_train)
 
+print("LOGISTIC REGRESSION")
 pred_y = m.predict(X_test)
-
-
-from sklearn.metrics import classification_report
-err = classification_report(y_test,pred_y)
-print("logistic regression",err)
+print("PREDICTIONS")
+print("expert diagnosis:", pred_y)
 
 
 from sklearn.neighbors import KNeighborsClassifier
@@ -61,9 +59,24 @@ for j in range(1,round(np.sqrt(rows))):
     py = model.predict(X_test)
     f1scores.append(f1_score(y_test,py,average="macro"))
 
+max = max(f1scores)
+k = f1scores.index(max)+1
+
+model = KNeighborsClassifier(k)
+model.fit(X_train,y_train)
+pred_knn = model.predict(X_test)
+print("KNN CLASSIFIER")
+print("PREDICTIONS")
+print("expert diagnosis:", pred_knn)
 
 from sklearn.metrics import classification_report
-err2 = classification_report(y_test,py)
-print(err2)
+err = classification_report(y_test,pred_y)
+print("LOGISTIC REGRESSION REPORT:")
+print(err)
 
+
+from sklearn.metrics import classification_report
+err2 = classification_report(y_test,pred_knn)
+print("KNN REPORT:")
+print(err2)
 
