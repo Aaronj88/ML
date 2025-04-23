@@ -17,6 +17,7 @@ dfidf_matrix = obj.fit_transform(df["overview"])
 print(dfidf_matrix.shape)
 print(obj.get_feature_names_out()[5000:5010])
 
+#finding the similarity
 from sklearn.metrics.pairwise import linear_kernel
 similarity = linear_kernel(dfidf_matrix,dfidf_matrix)
 print(similarity.shape)
